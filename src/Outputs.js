@@ -120,23 +120,23 @@ export default function Outputs(props) {
           });
         },
       }).then((num) => {
-        
-        if(num.isConfirmed == true){
-        if (+num.value === +0) {
-          remove(productRef);
-        } else {
-          update(productRef, {
-            title: data.title,
-            price: data.price,
-            taxes: data.taxes,
-            ads: data.ads,
-            discount: data.discount,
-            total: data.total,
-            count: num.value,
-            category: data.category,
-          });
+
+        if (num.isConfirmed) {
+          if (+num.value === 0) {
+            remove(productRef);
+          } else {
+            update(productRef, {
+              title: data.title,
+              price: data.price,
+              taxes: data.taxes,
+              ads: data.ads,
+              discount: data.discount,
+              total: data.total,
+              count: num.value,
+              category: data.category,
+            });
+          }
         }
-      }
       });
     } else {
       Swal.fire({
@@ -266,12 +266,12 @@ export default function Outputs(props) {
     if (inputTxt === "") {
       setProducts(productRes);
     } else {
-      if (methSearch == "Search By Title") {
+      if (methSearch === "Search By Title") {
         let result = productRes.filter((pro) =>
           pro[1].title.includes(inputTxt)
         );
         setProducts(result);
-      } else if (methSearch == "Search By Category") {
+      } else if (methSearch === "Search By Category") {
         let result = productRes.filter((pro) =>
           pro[1].category.includes(inputTxt)
         );
